@@ -267,7 +267,7 @@ class IntergerDivision(Operation):
         return a // b
 
 class Percentage(Operation):
-    def validat_operands(self, a: Decimal, b: Decimal) -> None:
+    def validate_operands(self, a: Decimal, b: Decimal) -> None:
          super().validate_operands(a, b)
         if b == 0:
             raise ValueError("Cannot calculate percentage when the base value (b) is zero.")
