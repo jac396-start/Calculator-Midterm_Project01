@@ -1,4 +1,3 @@
-
 ########################
 #  Calculator REPL     #
 ########################
@@ -66,7 +65,7 @@ def calculator_repl():
                         print("\nCalculation History:")
                         for i, entry in enumerate(history, 1):
                             print(f"{i}. {entry}")
-                     continue
+                    continue
 
                 if command == 'clear':
                     # Clear calculation history

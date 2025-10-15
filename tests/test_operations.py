@@ -12,9 +12,9 @@ from app.operations import (
     Power,
     Root,
     Modulus,
-    Interger_Division,
+    IntegerDivision,
     Percentage,
-    Absolute_Difference,
+    AbsoluteDifference,
     OperationFactory,
 )
 

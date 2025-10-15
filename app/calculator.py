@@ -1,6 +1,5 @@
-
 ########################
-#  Calculator Class    #
+# Calculator Class      #
 ########################
 
 from decimal import Decimal
@@ -187,7 +186,7 @@ class Calculator:
         Raises:
             OperationError: If no operation is set or if the operation fails.
             ValidationError: If input validation fails.
-            """
+        """
         if not self.operation_strategy:
             raise OperationError("No operation set")
 
@@ -241,70 +240,7 @@ class Calculator:
         persistent storage. Utilizes pandas DataFrames for efficient data handling.
 
         Raises:
-        logging.info(f"Added observer: {observer.__class__.__name__}")
-
-    def remove_observer(self, observer: HistoryObserver) -> None:
-        """
-        Remove an existing observer.
-
-        Removes an observer from the list, preventing it from receiving further updates.
-
-        Args:
-            observer (HistoryObserver): The observer to be removed.
-        """
-        self.observers.remove(observer)
-        logging.info(f"Removed observer: {observer.__class__.__name__}")
-
-    def notify_observers(self, calculation: Calculation) -> None:
-        """
-        Notify all observers of a new calculation.
-
-        Iterates through the list of observers and calls their update method,
-        passing the new calculation as an argument.
-
-        Args:
-            calculation (Calculation): The latest calculation performed.
-        """
-        for observer in self.observers:
-            observer.update(calculation)
-
-    def set_operation(self, operation: Operation) -> None:
-        """
-        Set the current operation strategy.
-
-        Assigns the operation strategy that will be used for performing calculations.
-        This is part of the Strategy pattern, allowing the calculator to switch between
-        different operation algorithms dynamically.
-
-        Args:
-            operation (Operation): The operation strategy to be set.
-        """
-        self.operation_strategy = operation
-        logging.info(f"Set operation: {operation}")
-
-    def perform_operation(
-        self,
-        a: Union[str, Number],
-        b: Union[str, Number]
-    ) -> CalculationResult:
-        """
-        Perform calculation with the current operation.
-
-        Validates and sanitizes user inputs, executes the calculation using the
-        current operation strategy, updates the history, and notifies observers.
-
-        Args:
-            a (Union[str, Number]): The first operand, can be a string or a numeric type.
-            b (Union[str, Number]): The second operand, can be a string or a numeric type.
-
-        Returns:
-            CalculationResult: The result of the calculation.
-
-        Raises:
-            OperationError: If no operation is set or if the operation fails.
-            ValidationError: If input validation fails.
-        """
-                                                                                                 18            OperationError: If saving the history fails.
+            OperationError: If saving the history fails.
         """
         try:
             # Ensure the history directory exists
@@ -438,7 +374,7 @@ class Calculator:
         # Push the current state onto the redo stack
         self.redo_stack.append(CalculatorMemento(self.history.copy()))
         # Restore the history from the memento
-        self.history = memento.history.copy() 
+        self.history = memento.history.copy()
         return True
 
     def redo(self) -> bool:
@@ -458,5 +394,4 @@ class Calculator:
         self.undo_stack.append(CalculatorMemento(self.history.copy()))
         # Restore the history from the memento
         self.history = memento.history.copy()
-        return True
-                           
+        return True    

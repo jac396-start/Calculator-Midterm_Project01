@@ -258,8 +258,8 @@ class Modulus(Operation):
         self.validate_operands(a, b)
         return a % b
 
-class IntergerDivision(Operation):
-    def validate_operandsself(self, a: Decimal, b: Decimal) -> None:
+class IntegerDivision(Operation):
+    def validate_operands(self, a: Decimal, b: Decimal) -> None:
         super().validate_operands(a, b)
         if b == 0:
             raise ValueError("Integer division by zero is not allowed.")
@@ -269,7 +269,7 @@ class IntergerDivision(Operation):
 class Percentage(Operation):
     def validate_operands(self, a: Decimal, b: Decimal) -> None:
          super().validate_operands(a, b)
-        if b == 0:
+         if b == 0:
             raise ValueError("Cannot calculate percentage when the base value (b) is zero.")
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
         return (a / b) * Decimal('100')
@@ -287,7 +287,7 @@ class OperationFactory:
             'power': Power,
             'root': Root,
             'modulus': Modulus,
-            'interger_division': IntergerDivision,
+            'integer_division': IntegerDivision,
             'percentage': Percentage,
             'absolute_difference': AbsoluteDifference
     }
