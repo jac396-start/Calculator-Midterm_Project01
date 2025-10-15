@@ -1,5 +1,5 @@
 ########################
-#  Calculation Model   #
+#  Calculation Model    #
 ########################
 
 from dataclasses import dataclass, field
