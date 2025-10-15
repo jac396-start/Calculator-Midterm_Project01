@@ -1,5 +1,5 @@
 ########################
-# History Management    #
+#  History Management  #
 ########################
 
 from abc import ABC, abstractmethod

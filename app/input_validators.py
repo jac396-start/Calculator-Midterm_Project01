@@ -1,5 +1,5 @@
 ########################
-# Input Validation     #
+#  Input Validation    #
 ########################
 
 from dataclasses import dataclass

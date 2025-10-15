@@ -1,6 +1,6 @@
 
 ########################
-# Calculator Class      #
+#  Calculator Class    #
 ########################
 
 from decimal import Decimal

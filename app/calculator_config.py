@@ -1,5 +1,5 @@
 ########################
-# Calculator Config    #
+#  Calculator Config   #
 ########################
 
 from dataclasses import dataclass

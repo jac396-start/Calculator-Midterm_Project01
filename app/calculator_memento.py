@@ -1,5 +1,5 @@
 ########################
-# Calculator Memento    #
+#  Calculator Memento  #
 ########################
 
 from dataclasses import dataclass, field

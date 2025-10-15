@@ -1,5 +1,5 @@
 ########################
-# Operation Classes    #
+#  Operation Classes   #
 ########################
 
 from abc import ABC, abstractmethod
