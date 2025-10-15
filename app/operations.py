@@ -259,7 +259,7 @@ class Modulus(Operation):
         return a % b
 
 class IntergerDivision(Operation):
-    def validate_operands)self, a: Decimal, b: Decimal) -> None:
+    def validate_operandsself(self, a: Decimal, b: Decimal) -> None:
         super().validate_operands(a, b)
         if b == 0:
             raise ValueError("Integer division by zero is not allowed.")

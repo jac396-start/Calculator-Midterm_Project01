@@ -64,7 +64,7 @@ class Calculation:
             "Root": lambda x, y: (
                 Decimal(pow(float(x), 1 / float(y)))
                 if x >= 0 and y != 0
-                else self._raise_invalid_root(x, y)
+                else self._raise_invalid_root(x, y),
             "Modulus": lambda x, y: x % y if y != 0 else self._raise_div_zero(),
             "Integer Division": lambda x, y: x // y if y != 0 else self._raise_div_zero(),
             "Percentage": lambda x, y: (x / y) * Decimal(100) if y != 0 else self._raise_div_zero(),
