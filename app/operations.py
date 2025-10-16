@@ -272,7 +272,7 @@ class Modulus(Operation):
         super().validate_operands(a, b)
         if b == 0:
             # FIX: Change message to match test expectation
-            raise ValidationError("Cannot divide by zero")
+            raise ValidationError("Division by zero is not allowed")
 
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
         """
@@ -316,7 +316,7 @@ class IntegerDivision(Operation):
         if b == 0:
             # FIX: Change exception type from ValueError to ValidationError
             # FIX: Change message to match test expectation
-            raise ValidationError("Cannot divide by zero")
+            raise ValidationError("Division by zero is not allowed")
 
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
         """
@@ -360,7 +360,7 @@ class Percentage(Operation):
         if b == 0:
             # FIX: Change exception type from ValueError to ValidationError
             # FIX: Change message to match test expectation
-            raise ValidationError("Cannot divide by zero")
+            raise ValidationError("Division by zero is not allowed")
 
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
         """
