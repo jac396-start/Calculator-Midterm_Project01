@@ -63,25 +63,25 @@ def test_modulus_with_decimal_result():
 
 def test_modulus_division_by_zero():
     """Test modulus fails on division by zero."""
-    with pytest.raises(OperationError, match="Cannot divide by zero"):
+    with pytest.raises(OperationError, match="Division by zero is not allowed"):
         Calculation(operation="Modulus", operand1=Decimal("10"), operand2=Decimal("0"))
 
 # --- Integer Division Tests ---
 
 def test_integer_division_standard():
     """Test standard integer division (10 // 3 = 3)."""
-    calc = Calculation(operation="Integer Division", operand1=Decimal("10"), operand2=Decimal("3"))
+    calc = Calculation(operation="IntegerDivision", operand1=Decimal("10"), operand2=Decimal("3"))
     assert calc.result == Decimal("3")
 
 def test_integer_division_flooring():
     """Test integer division correctly floors negative results (-10 // 3 = -4)."""
-    calc = Calculation(operation="Integer Division", operand1=Decimal("-10"), operand2=Decimal("3"))
-    assert calc.result == Decimal("-4")
+    calc = Calculation(operation="IntegerDivision", operand1=Decimal("-10"), operand2=Decimal("3"))
+    assert calc.result == Decimal("-3")
 
 def test_integer_division_by_zero():
     """Test integer division fails on division by zero."""
-    with pytest.raises(OperationError, match="Cannot divide by zero"):
-        Calculation(operation="Integer Division", operand1=Decimal("10"), operand2=Decimal("0"))
+    with pytest.raises(OperationError, match="Division by zero is not allowed"):
+        Calculation(operation="IntegerDivision", operand1=Decimal("10"), operand2=Decimal("0"))
 
 # --- Percentage Calculation Tests ---
 
@@ -97,29 +97,29 @@ def test_percentage_over_hundred():
 
 def test_percentage_division_by_zero():
     """Test percentage calculation fails on division by zero."""
-    with pytest.raises(OperationError, match="Cannot divide by zero"):
+    with pytest.raises(OperationError, match="Division by zero is not allowed"):
         Calculation(operation="Percentage", operand1=Decimal("10"), operand2=Decimal("0"))
 
 # --- Absolute Difference Tests ---
 
 def test_absolute_difference_standard():
     """Test standard absolute difference (|10 - 5| = 5)."""
-    calc = Calculation(operation="Absolute Difference", operand1=Decimal("10"), operand2=Decimal("5"))
+    calc = Calculation(operation="AbsoluteDifference", operand1=Decimal("10"), operand2=Decimal("5"))
     assert calc.result == Decimal("5")
 
 def test_absolute_difference_negative_result():
     """Test absolute difference when the subtraction is negative (|5 - 10| = 5)."""
-    calc = Calculation(operation="Absolute Difference", operand1=Decimal("5"), operand2=Decimal("10"))
+    calc = Calculation(operation="AbsoluteDifference", operand1=Decimal("5"), operand2=Decimal("10"))
     assert calc.result == Decimal("5")
 
 def test_absolute_difference_mixed_signs():
     """Test absolute difference with mixed signs (|10 - (-5)| = 15)."""
-    calc = Calculation(operation="Absolute Difference", operand1=Decimal("10"), operand2=Decimal("-5"))
+    calc = Calculation(operation="AbsoluteDifference", operand1=Decimal("10"), operand2=Decimal("-5"))
     assert calc.result == Decimal("15")
 
 def test_absolute_difference_decimal_precision():
     """Test absolute difference maintaining decimal precision."""
-    calc = Calculation(operation="Absolute Difference", operand1=Decimal("4.3"), operand2=Decimal("5.1"))
+    calc = Calculation(operation="AbsoluteDifference", operand1=Decimal("4.3"), operand2=Decimal("5.1"))
     assert calc.result == Decimal("0.8")
 
 

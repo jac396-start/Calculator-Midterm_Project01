@@ -15,12 +15,15 @@ from app.operations import (
     IntegerDivision,
     Percentage,
     AbsoluteDifference,
-    OperationFactory,
+    OperationFactory
 )
 
 
 class TestOperation:
+    """Test base Operation class functionality."""
+
     def test_str_representation(self):
+        """Test that string representation returns class name."""
         class TestOp(Operation):
             def execute(self, a: Decimal, b: Decimal) -> Decimal:
                 return a
@@ -29,12 +32,14 @@ class TestOperation:
 
 
 class BaseOperationTest:
+    """Base test class for all operations."""
 
     operation_class: Type[Operation]
     valid_test_cases: Dict[str, Dict[str, Any]]
     invalid_test_cases: Dict[str, Dict[str, Any]]
 
     def test_valid_operations(self):
+        """Test operation with valid inputs."""
         operation = self.operation_class()
         for name, case in self.valid_test_cases.items():
             a = Decimal(str(case["a"]))
@@ -44,6 +49,7 @@ class BaseOperationTest:
             assert result == expected, f"Failed case: {name}"
 
     def test_invalid_operations(self):
+        """Test operation with invalid inputs raises appropriate errors."""
         operation = self.operation_class()
         for name, case in self.invalid_test_cases.items():
             a = Decimal(str(case["a"]))
@@ -56,6 +62,7 @@ class BaseOperationTest:
 
 
 class TestAddition(BaseOperationTest):
+    """Test Addition operation."""
 
     operation_class = Addition
     valid_test_cases = {
@@ -74,6 +81,7 @@ class TestAddition(BaseOperationTest):
 
 
 class TestSubtraction(BaseOperationTest):
+    """Test Subtraction operation."""
 
     operation_class = Subtraction
     valid_test_cases = {
@@ -92,6 +100,7 @@ class TestSubtraction(BaseOperationTest):
 
 
 class TestMultiplication(BaseOperationTest):
+    """Test Multiplication operation."""
 
     operation_class = Multiplication
     valid_test_cases = {
@@ -110,6 +119,7 @@ class TestMultiplication(BaseOperationTest):
 
 
 class TestDivision(BaseOperationTest):
+    """Test Division operation."""
 
     operation_class = Division
     valid_test_cases = {
@@ -130,6 +140,7 @@ class TestDivision(BaseOperationTest):
 
 
 class TestPower(BaseOperationTest):
+    """Test Power operation."""
 
     operation_class = Power
     valid_test_cases = {
@@ -150,6 +161,7 @@ class TestPower(BaseOperationTest):
 
 
 class TestRoot(BaseOperationTest):
+    """Test Root operation."""
 
     operation_class = Root
     valid_test_cases = {
@@ -198,7 +210,7 @@ class TestModulus(BaseOperationTest):
             "a": "10",
             "b": "0",
             "error": ValidationError,
-            "message": "Cannot divide by zero" # Match the expected error message from your core logic
+            "message": "Division by zero is not allowed" # Match the expected error message from your core logic
         },
     }
 
@@ -228,7 +240,7 @@ class TestIntegerDivision(BaseOperationTest):
             "a": "10",
             "b": "0",
             "error": ValidationError,
-            "message": "Cannot divide by zero"
+            "message": "Division by zero is not allowed"
         },
     }
 
@@ -258,7 +270,7 @@ class TestPercentage(BaseOperationTest):
             "a": "10",
             "b": "0",
             "error": ValidationError,
-            "message": "Cannot divide by zero"
+            "message": "Division by zero is not allowed"
         },
     }
 
@@ -301,9 +313,9 @@ class TestOperationFactory:
             'power': Power,
             'root': Root,
             'modulus': Modulus,
-            'interger_division': Interger_Division,
+            'integer_division': IntegerDivision,
             'percentage': Percentage,
-            'absolute_difference': Absolute_Difference
+            'absolute_difference': AbsoluteDifference
         }
 
         for op_name, op_class in operation_map.items():

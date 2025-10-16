@@ -250,33 +250,158 @@ class Root(Operation):
 
 
 class Modulus(Operation):
+    """
+    Modulus (remainder) operation implementation.
+
+    Calculates the remainder of the division of one number by another.
+    """
+
     def validate_operands(self, a: Decimal, b: Decimal) -> None:
+        """
+        Validate operands, checking for modulus by zero.
+
+        Overrides the base class method to ensure that the divisor is not zero.
+
+        Args:
+            a (Decimal): Dividend.
+            b (Decimal): Divisor.
+
+        Raises:
+            ValidationError: If the divisor is zero.
+        """
         super().validate_operands(a, b)
         if b == 0:
-            raise ValidationError("Modulus division by zero not allowed")
+            # FIX: Change message to match test expectation
+            raise ValidationError("Cannot divide by zero")
+
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
+        """
+        Calculate the remainder of the division.
+
+        Args:
+            a (Decimal): Dividend.
+            b (Decimal): Divisor.
+
+        Returns:
+            Decimal: The remainder of the division.
+        """
         self.validate_operands(a, b)
-        return a % b
+        # FIX: Cast to float and back to Decimal to ensure standard Python floor-based
+        # modulus behavior, which fixes the 'negative_divisor' failure.
+        result = float(a) % float(b)
+        return Decimal(result)
+
 
 class IntegerDivision(Operation):
+    """
+    Integer Division operation implementation.
+
+    Performs division and floors the result to the nearest integer.
+    """
+
     def validate_operands(self, a: Decimal, b: Decimal) -> None:
+        """
+        Validate operands, checking for integer division by zero.
+
+        Overrides the base class method to ensure that the divisor is not zero.
+
+        Args:
+            a (Decimal): Dividend.
+            b (Decimal): Divisor.
+
+        Raises:
+            ValidationError: If the divisor is zero.
+        """
         super().validate_operands(a, b)
         if b == 0:
-            raise ValueError("Integer division by zero is not allowed.")
+            # FIX: Change exception type from ValueError to ValidationError
+            # FIX: Change message to match test expectation
+            raise ValidationError("Cannot divide by zero")
+
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
-        return a // b
+        """
+        Perform integer division.
+
+        Args:
+            a (Decimal): Dividend.
+            b (Decimal): Divisor.
+
+        Returns:
+            Decimal: The integer quotient (floored).
+        """
+        self.validate_operands(a, b)
+        # FIX: Cast to float and back to Decimal to ensure standard Python floor division,
+        # which fixes the 'negative_dividend' failure (Decimal.__floordiv__ truncates).
+        result = float(a) // float(b)
+        return Decimal(result)
+
 
 class Percentage(Operation):
+    """
+    Percentage operation implementation.
+
+    Calculates what percentage 'a' is of 'b' ((a / b) * 100).
+    """
+
     def validate_operands(self, a: Decimal, b: Decimal) -> None:
-         super().validate_operands(a, b)
-         if b == 0:
-            raise ValueError("Cannot calculate percentage when the base value (b) is zero.")
+        """
+        Validate operands, checking for a zero base value.
+
+        Overrides the base class method to ensure that the base value (b) is not zero.
+
+        Args:
+            a (Decimal): Value to be expressed as a percentage.
+            b (Decimal): Base value.
+
+        Raises:
+            ValidationError: If the base value (b) is zero.
+        """
+        super().validate_operands(a, b)
+        if b == 0:
+            # FIX: Change exception type from ValueError to ValidationError
+            # FIX: Change message to match test expectation
+            raise ValidationError("Cannot divide by zero")
+
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
+        """
+        Calculate the percentage of a relative to b.
+
+        Args:
+            a (Decimal): Value to be expressed as a percentage.
+            b (Decimal): Base value.
+
+        Returns:
+            Decimal: The percentage value.
+        """
+        self.validate_operands(a, b)
         return (a / b) * Decimal('100')
 
+
 class AbsoluteDifference(Operation):
+    """
+    Absolute Difference operation implementation.
+
+    Calculates the absolute difference between two numbers, |a - b|.
+    """
+
+    # Note: No custom validate_operands is required, as this operation is always valid.
+
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
-        return a - b
+        """
+        Calculate the absolute difference.
+
+        Args:
+            a (Decimal): First operand.
+            b (Decimal): Second operand.
+
+        Returns:
+            Decimal: The absolute value of their difference.
+        """
+        self.validate_operands(a, b)
+        # FIX: Add abs() to ensure the result is positive,
+        # which fixes the 'standard_reverse' failure.
+        return abs(a - b)
+
 
 class OperationFactory:
     _operations: Dict[str, type] = {
